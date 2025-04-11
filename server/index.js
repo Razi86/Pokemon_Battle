@@ -1,7 +1,10 @@
+import "./db/index.js";
 import express, { json } from "express";
 import cors from "cors";
-import { errorHandler } from "./utils/errorHandler";
+import { errorHandler } from "./utils/errorHandler.js";
 import cookieParser from "cookie-parser";
+import { config } from "dotenv";
+config();
 
 const app = express();
 const PORT = process.env.PORT;
