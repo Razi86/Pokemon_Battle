@@ -1,9 +1,13 @@
+import "./db/index.js";
 import express, { json } from "express";
 import cors from "cors";
 import { errorHandler } from "./utils/errorHandler.js";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoutes.js";
 import leaderboardRoutes from "./routes/leaderboardRoutes.js"
+import { config } from "dotenv";
+config();
+
 const app = express();
 const PORT = process.env.PORT;
 
