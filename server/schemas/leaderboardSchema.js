@@ -2,10 +2,7 @@ import { Schema, model } from "mongoose";
 
 const leaderboardSchema = new Schema(
   {
-    username: {
-      type: String,
-      required: true,
-    },
+    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     score: {
       type: Number,
       required: true,

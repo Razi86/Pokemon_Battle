@@ -1,8 +1,9 @@
 import express, { json } from "express";
 import cors from "cors";
-import { errorHandler } from "./utils/errorHandler";
+import { errorHandler } from "./utils/errorHandler.js";
 import cookieParser from "cookie-parser";
-
+import userRoutes from "./routes/userRoutes.js";
+import leaderboardRoutes from "./routes/leaderboardRoutes.js"
 const app = express();
 const PORT = process.env.PORT;
 
@@ -16,6 +17,13 @@ app.use(
   json({ limit: "50mb" }),
   cookieParser()
 );
+
+
+
+// Routes
+app.use("/users", userRoutes);
+app.use("/leaderboard", leaderboardRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("Server is running!");
