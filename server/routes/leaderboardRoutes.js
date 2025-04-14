@@ -6,10 +6,11 @@ import {
   // updateScore,
   // deleteScore,
 } from "../controllers/leaderboardController.js";
+import { validateScore } from "../middlewares/joiValidation.js";
 
 const router = express.Router();
 
-router.post("/:id", createScore);
+router.post("/:id",validateScore, createScore);
 router.get("/", getAllScores);
 // router.get("/:id", getScoreById);
 // router.put("/:id", updateScore);

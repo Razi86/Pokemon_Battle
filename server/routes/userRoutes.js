@@ -6,17 +6,17 @@ import {
   getAllUsers,
   getUserById,
   updateUser,
-  deleteUser,
-  
+  deleteUser
 } from "../controllers/userController.js";
+import { validateLogin,validateSignUp,validateUpdateUser } from "../middlewares/joiValidation.js";
 
 const router = express.Router();
-router.post(`/register`, createUser);
-router.post(`/login`, loginUser);
+router.post(`/register`,validateSignUp,createUser);
+router.post(`/login`,validateLogin,loginUser);
 router.post(`/logout`, logoutUser);
 router.get("/", getAllUsers);
 router.get("/:id", getUserById);
-router.put("/:id", updateUser);
+router.put("/:id",validateUpdateUser,updateUser);
 router.delete("/:id", deleteUser);
 
 export default router;
