@@ -92,7 +92,9 @@ function Home() {
                 <p className="text-gray-600 text-sm font-normal">
                   ID: {pokemon.id}
                 </p>
-                <NavLink className="text-blue-900 underline">
+                
+                 
+                <NavLink to={`/pokemonDetails/${pokemon.name}`} className="text-blue-900 underline">
                   More Details
                 </NavLink>
               </div>
