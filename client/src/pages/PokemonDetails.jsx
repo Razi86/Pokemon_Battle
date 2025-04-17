@@ -81,7 +81,9 @@ const PokemonDetails = () => {
             <NavLink to="/" className="text-blue-900 underline">
                 Back to Home
             </NavLink>
-
+            <NavLink to="/battle" className="text-blue-900 underline">
+               Ballte
+            </NavLink>
         </div>
     );
 };

@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import PokemonDetails from "./pages/PokemonDetails";
+import Battle from './pages/Battle';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/pokemonDetails/:name" element={<PokemonDetails />} /> 
+        <Route path="/battle" element={<Battle />} /> 
       </Routes>
     </div>
   );
