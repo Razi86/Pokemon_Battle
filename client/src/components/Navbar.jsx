@@ -63,11 +63,11 @@ function Navbar() {
             to="/"
             onClick={(e) => {
               e.preventDefault();
-              window.location.href = "/roaster";
+              window.location.href = "/roster";
             }}
             className="text-blue-900 font-medium tracking-[1px]"
           >
-            Roaster
+            Roster
           </NavLink>
           {user && (
             <NavLink
