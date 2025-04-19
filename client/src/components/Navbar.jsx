@@ -85,7 +85,6 @@ function Navbar() {
           className="input text-blue-900 font-medium tracking-[1px] bg-transparent input-bordered rounded-full border-blue-800 outline-0 w-[20rem]"
           onChange={(e) => handleSearch(e.target.value)}
         />
-
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
