@@ -21,7 +21,7 @@ const PokemonDetails = () => {
                 'roster',
                 JSON.stringify([
                     ...currentRoster,
-                    { name, sprite: pokemon.sprites.front_default, stats: pokemon.stats },
+                    { name,id : pokemon.id, sprite: pokemon.sprites.front_default, stats: pokemon.stats },
                 ])
             );
         }
@@ -83,6 +83,9 @@ const PokemonDetails = () => {
             </NavLink>
             <NavLink to="/battle" className="text-blue-900 underline">
                Ballte
+            </NavLink>
+            <NavLink to="/roster" className="text-blue-900 underline">
+               Roster
             </NavLink>
         </div>
     );
