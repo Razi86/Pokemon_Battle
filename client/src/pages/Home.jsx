@@ -1,46 +1,53 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 function Home() {
-  const [pokemonList, setPokemonList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const {
+    pokemon = [],
+    error,
+    loading,
+    sortPokemon,
+    sortOrder,
+  } = useContext(AuthContext);
+  const [activeSort, setActiveSort] = useState(null);
+  // const [pokemonList, setPokemonList] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 8;
 
   const offset = currentPage * itemsPerPage;
-  const currentItems = pokemonList.slice(offset, offset + itemsPerPage);
-  const pageCount = Math.ceil(pokemonList.length / itemsPerPage);
+  const currentItems = Array.isArray(pokemon)
+    ? pokemon.slice(offset, offset + itemsPerPage)
+    : [];
+  const pageCount = Math.ceil((pokemon?.length || 0) / itemsPerPage);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
 
-  useEffect(() => {
-    const fetchPokemon = async () => {
-      try {
-        const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=40");
-        if (!res.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const data = await res.json();
-        const pokemonData = await Promise.all(
-          data.results.map(async (pokemon) => {
-            const res = await fetch(pokemon.url);
-            return res.json();
-          })
-        );
-        setPokemonList(pokemonData);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPokemon();
-  }, []);
+  // useEffect(() => {
+  //   const fetchPokemon = async () => {
+  //     try {
+  //       const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=40");
+  //       if (!res.ok) {
+  //         throw new Error("Failed to fetch data");
+  //       }
+  //       const data = await res.json();
+  //       const pokemonData = await Promise.all(
+  //         data.results.map(async (pokemon) => {
+  //           const res = await fetch(pokemon.url);
+  //           return res.json();
+  //         })
+  //       );
+  //       setPokemonList(pokemonData);
+  //     } catch (error) {
+  //       console.error("Error fetching Pokemon data:", error);
+  //     }
+  //   };
+  //   fetchPokemon();
+  // }, []);
 
   return (
     <div className="homeContainer w-full min-h-[100vh] pt-[10rem] flex flex-col items-center bg-gray-100">
@@ -50,12 +57,35 @@ function Home() {
             <h1 className="text-5xl font-medium">Pokemon</h1>
             <h2 className="text-xl font-normal">List of Pokemon</h2>
           </div>
-          <div className="btns flex items-end gap-x-2">
-            <button className="btn w-[6rem] btn-outline rounded-full outline-blue-900 text-[1rem] text-blue-900 hover:bg-blue-900 hover:text-white transition-all duration-[.5s]">
-              A-Z
+          <div className="flex gap-4 mt-4">
+            <button
+              onClick={() => {
+                sortPokemon("asc");
+                setActiveSort("asc");
+              }}
+              className={`w-[4.7rem] h-[2.3rem] border rounded-full shadow transition-all duration-300 cursor-pointer
+              ${
+                activeSort === "asc"
+                  ? "bg-blue-900 text-yellow-300 font-bold border-blue-900"
+                  : "text-blue-900 border-blue-900 hover:bg-blue-900 hover:text-yellow-300 font-medium"
+              }`}
+            >
+              A → Z
             </button>
-            <button className="btn w-[6rem] btn-outline rounded-full outline-blue-900 text-[1rem] text-blue-900 hover:bg-blue-900 hover:text-white transition-all duration-[.5s]">
-              Z-A
+
+            <button
+              onClick={() => {
+                sortPokemon("desc");
+                setActiveSort("desc");
+              }}
+              className={`w-[4.7rem] h-[2.3rem] border rounded-full shadow transition-all duration-300 cursor-pointer
+              ${
+                activeSort === "desc"
+                  ? "bg-blue-900 text-yellow-300 font-bold border-blue-900"
+                  : "text-blue-900 border-blue-900 hover:bg-blue-900 hover:text-yellow-300 font-medium"
+              }`}
+            >
+              Z → A
             </button>
           </div>
         </div>
@@ -92,9 +122,11 @@ function Home() {
                 <p className="text-gray-600 text-sm font-normal">
                   ID: {pokemon.id}
                 </p>
-                
-                 
-                <NavLink to={`/pokemonDetails/${pokemon.name}`} className="text-blue-900 underline">
+
+                <NavLink
+                  to={`/pokemonDetails/${pokemon.name}`}
+                  className="text-blue-900 underline"
+                >
                   More Details
                 </NavLink>
               </div>
@@ -107,15 +139,25 @@ function Home() {
         <ReactPaginate
           previousLabel={"←"}
           nextLabel={"→"}
+          breakLabel={"..."}
           pageCount={pageCount}
           onPageChange={handlePageClick}
+          marginPagesDisplayed={3}
+          pageRangeDisplayed={3}
           containerClassName={"flex gap-2"}
           pageClassName={
             "px-4 py-2 bg-white rounded shadow text-blue-900 cursor-pointer"
           }
-          activeClassName={"bg-blue-900 text-blue-900"}
-          previousClassName={"p-2 bg-blue-900 rounded shadow cursor-pointer"}
-          nextClassName={"p-2 bg-blue-900 rounded shadow cursor-pointer"}
+          activeClassName={
+            "bg-blue-900 text-blue-900 font-bold border border-blue-700"
+          }
+          breakClassName={"text-blue-900 px-2 py-2"}
+          previousClassName={
+            "p-2 bg-blue-900 text-yellow-300 rounded shadow cursor-pointer"
+          }
+          nextClassName={
+            "p-2 bg-blue-900 text-yellow-300 rounded shadow cursor-pointer"
+          }
           disabledClassName={"opacity-50 cursor-not-allowed"}
         />
       </div>
