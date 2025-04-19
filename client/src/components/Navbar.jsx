@@ -12,6 +12,48 @@ function Navbar() {
           </figure>
         </NavLink>
       </div>
+
+      <div className="flex items-center gap-2">
+        <div className="links flex items-center gap-5 mr-5">
+          <NavLink
+            to="/"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/";
+            }}
+            className="text-blue-900 font-medium tracking-[1px]"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/battle";
+            }}
+            className="text-blue-900 font-medium tracking-[1px]"
+          >
+            Battle
+          </NavLink>
+          <NavLink
+            to="/"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/roster";
+            }}
+            className="text-blue-900 font-medium tracking-[1px]"
+          >
+            Roster
+          </NavLink>
+          {user && (
+            <NavLink
+              to="/leaderboard"
+              className="text-blue-900 font-medium tracking-[1px]"
+            >
+              Leaderboard
+            </NavLink>
+          )}
+        </div>
       <div className="flex gap-2">
         <input
           type="text"
