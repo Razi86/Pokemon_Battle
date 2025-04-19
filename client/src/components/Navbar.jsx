@@ -16,7 +16,7 @@ function Navbar() {
         <input
           type="text"
           placeholder="Search"
-          className="input text-blue-900 font-medium tracking-[1px] bg-transparent input-bordered rounded-full border-blue-800 outline-0 w-[20rem]"
+          className="input text-blue-900 font-medium tracking-[1px] bg-transparent input-bordered rounded-full border-blue-800 outline-0 w-[20rem] "
         />
         <div className="dropdown dropdown-end">
           <div
