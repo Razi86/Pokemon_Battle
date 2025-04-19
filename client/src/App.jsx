@@ -6,6 +6,9 @@ import Navbar from "./components/Navbar";
 import PokemonDetails from "./pages/PokemonDetails";
 import Battle from './pages/Battle';
 import Roster from "./pages/Roster";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -13,10 +16,13 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/pokemonDetails/:name" element={<PokemonDetails />} /> 
         <Route path="/battle" element={<Battle />} /> 
         <Route path="/battle" element={<Battle />} /> 
         <Route path="/roster" element={<Roster />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );
