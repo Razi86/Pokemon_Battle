@@ -49,6 +49,26 @@ function Navbar() {
           >
             Home
           </NavLink>
+          <NavLink
+            to="/"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/battle";
+            }}
+            className="text-blue-900 font-medium tracking-[1px]"
+          >
+            Battle
+          </NavLink>
+          <NavLink
+            to="/"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/roaster";
+            }}
+            className="text-blue-900 font-medium tracking-[1px]"
+          >
+            Roaster
+          </NavLink>
           {user && (
             <NavLink
               to="/leaderboard"
