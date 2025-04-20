@@ -135,6 +135,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     secure: NODE_ENV === "production",
     sameSite: NODE_ENV === "production" ? "None" : "Lax",
     maxAge: 24 * 60 * 60 * 1000,
+    path: "/",
   });
 
   res.status(200).json({
@@ -159,3 +160,11 @@ export const logoutUser = (req, res) => {
 
   res.status(200).json({ message: "Logout successful" });
 };
+
+export const checkSession = (req, res) => {
+  if(req.user){
+    res.json({authenticated: true, user: req.user});
+  }else {
+    res.json({authenticated: false});
+  }
+}
