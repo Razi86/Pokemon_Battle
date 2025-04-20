@@ -96,6 +96,11 @@ export const updateUser = asyncHandler(async (req, res) => {
 export const deleteUser = asyncHandler(async (req, res) => {
   const userId = req.params.id;
 
+  const score = await Leaderboard.findOne({ user: userId });
+  if (score) {  
+    await Leaderboard.findByIdAndDelete(score._id);
+  }
+  
   const user = await User.findByIdAndDelete(userId);
 
   if (!user) throw new CustomError("user not found", 404);

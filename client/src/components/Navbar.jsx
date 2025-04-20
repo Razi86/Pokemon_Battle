@@ -4,12 +4,18 @@ import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div className="navbar w-full max-w-[1600px] fixed top-0 bg-white shadow-sm px-[5rem] py-[1rem]">
+    <div className="navbar w-full max-w-[1600px] fixed top-0 bg-white shadow-sm px-[5rem] py-[1rem] z-5">
       <div className="flex-1">
         <NavLink to={`/`} className="logo w-[5rem] text-red-600 text-xl">
           <figure className="w-[5rem]">
             <img src={logo} alt="" />
           </figure>
+        </NavLink>
+      </div>
+      <div className="flex-1">
+        <NavLink className="text-blue-900 text-xl font-bold hover:text-blue-800"
+         to={'/leaderboard'}>
+          LeaderBoard
         </NavLink>
       </div>
       <div className="flex gap-2">
