@@ -49,26 +49,25 @@ function Navbar() {
           >
             Home
           </NavLink>
-          <NavLink
-            to="/"
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.href = "/battle";
-            }}
-            className="text-blue-900 font-medium tracking-[1px]"
-          >
-            Battle
-          </NavLink>
-          <NavLink
-            to="/"
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.href = "/roster";
-            }}
-            className="text-blue-900 font-medium tracking-[1px]"
-          >
-            Roster
-          </NavLink>
+        
+        
+          {user && (
+            <NavLink
+              to="/battle"
+              className="text-blue-900 font-medium tracking-[1px]"
+            >
+              Battle
+            </NavLink>
+          )}
+          {user && (
+            <NavLink
+              to="/roster"
+              className="text-blue-900 font-medium tracking-[1px]"
+            >
+              Roster
+            </NavLink>
+          )}
+
           {user && (
             <NavLink
               to="/leaderboard"
@@ -77,6 +76,9 @@ function Navbar() {
               Leaderboard
             </NavLink>
           )}
+
+
+
         </div>
 
         <input
