@@ -82,7 +82,7 @@ console.log(selectedPokemon)
             <h3 className='font-bold pb-3 text-blue-900 luckiest-guy-regular'>{pokemon.name}</h3>
             <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
             alt={pokemon.name}
-            className='w-[120px]'/>
+            className='w-[180px]'/>
           </div>
         ))}
       </div>
@@ -98,7 +98,7 @@ console.log(selectedPokemon)
               <p className='font-bold luckiest-guy-regular text-blue-900'>{selectedPokemon.name}</p>
               <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${selectedPokemon.id}.svg`}
               alt={selectedPokemon.name}
-              className='w-[150px]'/>
+              className='w-[220px]'/>
               <div>
                 {selectedPokemon.stats.map(stat => (
                   <p key={stat.stat.name} className='text-sm text-blue-900'>
@@ -109,7 +109,7 @@ console.log(selectedPokemon)
             </div>
             
             <div className='flex flex-col items-center'>
-              <div className='vs w-[150px] h-[170px] mx-4 mb-5'></div>
+              <div className='vs w-[180px] h-[200px] mx-7 mb-5'></div>
               <button 
                 className='bg-red-900 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-red-700' 
                 onClick={() => fight(selectedPokemon)}>Fight!
@@ -131,7 +131,7 @@ console.log(selectedPokemon)
                   <p className='font-bold luckiest-guy-regular text-blue-900'>{enemy.name}</p>
                   <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${enemy.id}.svg`}
                   alt={enemy.name}
-                  className='w-[150px]'/>
+                  className='w-[220px]'/>
                   <div>
                     {enemy.stats.map(stat => (
                       <p key={stat.stat.name} className='text-sm text-blue-900'>
