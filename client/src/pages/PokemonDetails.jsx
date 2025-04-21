@@ -1,8 +1,11 @@
 import { useParams,NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 const PokemonDetails = () => {
     const { name } = useParams();
     const [pokemon, setPokemon] = useState(null);
+    const navigate= useNavigate();
 
     useEffect(() => {
         fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
@@ -78,15 +81,17 @@ const PokemonDetails = () => {
                     </div>
                 </div>
             </div>
-            <NavLink to="/" className="text-blue-900 underline">
-                Back to Home
-            </NavLink>
-            <NavLink to="/battle" className="text-blue-900 underline">
-               Ballte
-            </NavLink>
-            <NavLink to="/roster" className="text-blue-900 underline">
-               Roster
-            </NavLink>
+            <div className='flex justify-center my-3 gap-5'>
+                <button className='mt-5 bg-blue-500 hover:bg-red-600 text-white px-6 py-2 rounded-full font-semibold shadow-md transition duration-300'
+                    onClick={() => navigate(-1)}>
+                    Back to Home
+                </button>
+                <button className='mt-5 bg-blue-500 hover:bg-red-600 text-white px-6 py-2 rounded-full font-semibold shadow-md transition duration-300'
+                    onClick={() => navigate("/roster")}>
+                    Roster Page
+                </button>
+            </div>
+            
         </div>
     );
 };
