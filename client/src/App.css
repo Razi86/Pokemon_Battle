@@ -12,3 +12,8 @@
     width: 380px;
     height: 275px;
 }
+
+.vs{
+  background: url(../src/assets/images/vs.png) no-repeat;
+  background-size: contain;
+}
