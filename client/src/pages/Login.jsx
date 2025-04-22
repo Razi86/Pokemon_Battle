@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 function Login() {
-  const { setUser } = useContext(AuthContext);
+  const { setUser, fetchPokemon } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -24,6 +24,7 @@ function Login() {
         { withCredentials: true }
       );
       setUser(response.data.user);
+      await fetchPokemon();
       setSuccess("Login successful!");
       setEmail("");
       setPassword("");

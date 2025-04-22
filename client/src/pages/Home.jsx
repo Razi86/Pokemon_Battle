@@ -8,12 +8,11 @@ function Home() {
   const {
     pokemon = [],
     error,
-    loading,
+    pokemonLoading,
     sortPokemon,
     sortOrder,
   } = useContext(AuthContext);
   const [activeSort, setActiveSort] = useState(null);
-  // const [pokemonList, setPokemonList] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 8;
 
@@ -27,27 +26,9 @@ function Home() {
     setCurrentPage(selected);
   };
 
-  // useEffect(() => {
-  //   const fetchPokemon = async () => {
-  //     try {
-  //       const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=40");
-  //       if (!res.ok) {
-  //         throw new Error("Failed to fetch data");
-  //       }
-  //       const data = await res.json();
-  //       const pokemonData = await Promise.all(
-  //         data.results.map(async (pokemon) => {
-  //           const res = await fetch(pokemon.url);
-  //           return res.json();
-  //         })
-  //       );
-  //       setPokemonList(pokemonData);
-  //     } catch (error) {
-  //       console.error("Error fetching Pokemon data:", error);
-  //     }
-  //   };
-  //   fetchPokemon();
-  // }, []);
+  if (pokemonLoading) {
+    return <div className="loading">Loading...</div>;
+  }
 
   return (
     <div className="homeContainer w-full min-h-[100vh] pt-[10rem] flex flex-col items-center bg-gray-100">
@@ -97,7 +78,7 @@ function Home() {
       </div>
 
       <div className="pokemon-list w-full flex flex-wrap justify-center items-center gap-x-4 gap-y-6 mt-5">
-        {loading ? (
+        {pokemonLoading ? (
           <div className="loading">Loading...</div>
         ) : error ? (
           <div className="error">{error.message}</div>
