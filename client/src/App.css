@@ -1,1 +1,19 @@
 @plugin "daisyui";
+
+.luckiest-guy-regular {
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }  
+
+.leaderboard-bg{
+    background:url(../src/assets/images/leaderboard-bg.png) no-repeat;
+    background-size: contain;
+    width: 380px;
+    height: 275px;
+}
+
+.vs{
+  background: url(../src/assets/images/vs.png) no-repeat;
+  background-size: contain;
+}
