@@ -12,23 +12,6 @@ function AuthContextProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const res = await axios.get(`${ORIGIN_URL}users/check-session`, {
-          withCredentials: true,
-        });
-        setUser(res.data.user);
-        console.log(res.data.user);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    checkSession();
-  }, []);
-
   const logout = async () => {
     try {
       const res = await axios.post(
@@ -89,6 +72,23 @@ function AuthContextProvider({ children }) {
     setPokemon(sorted);
     setSortOrder(order);
   };
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const res = await axios.get(`${ORIGIN_URL}users/check-session`, {
+          withCredentials: true,
+        });
+        setUser(res.data.user);
+        console.log(res.data.user);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkSession();
+  }, []);
 
   return (
     <AuthContext.Provider
