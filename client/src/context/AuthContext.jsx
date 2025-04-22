@@ -9,6 +9,8 @@ function AuthContextProvider({ children }) {
   const [pokemon, setPokemon] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
   const [user, setUser] = useState(null);
+  const [sessionLoading, setSessionLoading] = useState(true);
+  const [pokemonLoading, setPokemonLoading] = useState(true);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,31 +30,27 @@ function AuthContextProvider({ children }) {
     }
   };
 
-  useEffect(() => {
-    const fetchPokemon = async () => {
-      try {
-        const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=80");
-        if (!res.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const data = await res.json();
-        const pokemonData = await Promise.all(
-          data.results.map(async (pokemon) => {
-            const res = await fetch(pokemon.url);
-            return res.json();
-          })
-        );
-        setOriginalPokemon(pokemonData);
-        setPokemon(pokemonData);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
+  const fetchPokemon = async () => {
+    try {
+      const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=80");
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
       }
-    };
-    fetchPokemon();
-  }, []);
+      const data = await res.json();
+      const pokemonData = await Promise.all(
+        data.results.map(async (pokemon) => {
+          const res = await fetch(pokemon.url);
+          return res.json();
+        })
+      );
+      setOriginalPokemon(pokemonData);
+      setPokemon(pokemonData);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setPokemonLoading(false);
+    }
+  };
 
   const handleSearch = (searchTerm) => {
     const filtered = originalPokemon.filter((poke) =>
@@ -74,6 +72,7 @@ function AuthContextProvider({ children }) {
   };
 
   useEffect(() => {
+    fetchPokemon();
     const checkSession = async () => {
       try {
         const res = await axios.get(`${ORIGIN_URL}users/check-session`, {
@@ -82,9 +81,8 @@ function AuthContextProvider({ children }) {
         setUser(res.data.user);
         console.log(res.data.user);
       } catch (error) {
-        setError(error);
       } finally {
-        setLoading(false);
+        setSessionLoading(false);
       }
     };
     checkSession();
@@ -95,6 +93,9 @@ function AuthContextProvider({ children }) {
       value={{
         user,
         setUser,
+        fetchPokemon,
+        pokemonLoading,
+        setPokemonLoading,
         loading,
         setLoading,
         error,
